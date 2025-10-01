@@ -8,7 +8,7 @@ if (is_numeric($player) == false || $player > 3) {
 
 $game = $_GET['game'] ?? 'a';
 
-if (false == in_array($game, ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','i','j','k','l'])) {
+if (false == in_array($game, ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','i','j'])) {
     header("Location: ?game=a");
     exit;
 }
@@ -98,6 +98,20 @@ set_error_handler(function ($e_code, $text, $file, $line) use ($player, $game) {
         top: 0%;
         left: 0%;
     }
+
+    #cos {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    #cos li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     </style>
 
     <link href="/NOG/assets/favicon-bos.png" rel="shortcut icon" type="image/png" />
@@ -114,13 +128,18 @@ set_error_handler(function ($e_code, $text, $file, $line) use ($player, $game) {
                 </div>
             </div>
             <div class="col-6 text-center pos-relative">
-                <img id="QR-code" class="w-50 py-3" src="/NOG/assets/QR-apply-to-BOS.png" />
+                <img id="QR-code" class="w-50 py-3" src="/NOG/assets/QR-apply-to-BOS-2025.jpeg" />
 
                 <img class="w-50 logo-taiat" src="/NOG/assets/for-c-and-e/logo-BOS-taiat.jpg" />
             </div>
         </div>
 
         <div id="app" class="text-center pt-5 pb-3">
+            <?php if ($game == 'j'): ?>
+            <h1>
+                Coș cumpărături Teambuilding
+            </h1>
+            <?php endif; ?>
             <?php include "errors/$player/$game/index.php"; ?>
         </div>
 
@@ -147,17 +166,6 @@ set_error_handler(function ($e_code, $text, $file, $line) use ($player, $game) {
                 <img src="/NOG/assets/for-f/correct-recipe.jpeg" class="w-50" />
             </div>
         </div>
-        <?php
-                break;
-            }
-            case 'j': { ?>
-        <h1>
-            Coș cumpărături Teambuilding
-        </h1>
-        <div>
-
-        </div>
-
 
         <?php 
                 break;
@@ -242,7 +250,6 @@ set_error_handler(function ($e_code, $text, $file, $line) use ($player, $game) {
         if (game == 'c') {
             if (overlayCheck(document.querySelectorAll('.logo-taiat, #QR-code')) == false) {
                 showQR();
-                console.log("sdadadada");
             }
         }
         if (game == 'd') {
@@ -276,11 +283,21 @@ set_error_handler(function ($e_code, $text, $file, $line) use ($player, $game) {
             }
         }
         if (game == 'i') {
-            if (x == "2025") {
+            if (x == "2025" || reclama != null) {
                 $("img.logo-taiat").css('display', 'none');
                 showQR();
             }
         }
+        document.querySelector(".vodca img").src = "/NOG/assets/for-j/vodca.jpg"
+        document.querySelector(".bere:last-child img").src = "/NOG/assets/for-j/bere.jpg"
+        document.querySelector(".vin img").src = "/NOG/assets/for-j/vin.jpg"
+        if (game == 'j') {
+
+            if (document.querySelector(".vin img") != null) {
+                showQR();
+            }
+        }
+
     });
     </script>
 </body>
